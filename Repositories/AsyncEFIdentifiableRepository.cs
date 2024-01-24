@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mtd.Core.Entities;
 using Mtd.Core.Repositories;
+using System.Security.Principal;
 
 namespace Mtd.Infrastructure.EFCore.Repositories
 {
@@ -11,6 +12,7 @@ namespace Mtd.Infrastructure.EFCore.Repositories
 		protected AsyncEFIdentifiableRepository(DbContext context) : base(context)
 		{
 		}
+
 
 		#region IAsyncIdentifiable
 
