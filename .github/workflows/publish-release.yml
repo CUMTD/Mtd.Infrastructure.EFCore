@@ -30,15 +30,15 @@ jobs:
       MtdGithubAccessToken: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x' # SDK Version to use.
+          dotnet-version: '9.0.x' # SDK Version to use.
       - name: Set VERSION variable from tag
         run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
       - name: Restore dependencies
         run: dotnet restore -p:Version=$VERSION $PACKAGE_ID.sln
       - name: Build
-        run: dotnet build --no-restore --configuration Release -p:Version=$VERSION $PACKAGE_ID.sln  
+        run: dotnet build --no-restore --configuration Release -p:Version=$VERSION $PACKAGE_ID.sln
       - name: Create the package
         run: dotnet pack $PACKAGE_ID.sln -p:Version=$VERSION -p:PackageVersion=$VERSION -p:PackageId="$PACKAGE_ID" -p:Copyright="$COPYRIGHT" -p:PackageRequireLicenseAcceptance=false -p:PackageLicenseExpression="$LICENSE" -p:PackageIcon="$ICON" -p:PackageReadmeFile="$README" -p:RepositoryUrl="$REPO" -p:RepositoryType=git -p:Description="$DESCRIPTION" -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg --no-build --no-restore --configuration Release --output $OUTPUT
       - name: Publish the package to GPR
