@@ -7,6 +7,6 @@
   <ItemGroup>
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Analyzers" Version="9.0.0" />
-    <PackageVersion Include="Mtd.Core" Version="9.0.1" />
+    <PackageVersion Include="Mtd.Core" Version="9.2.0" />
   </ItemGroup>
 </Project>
