@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Mtd.Core.Entities;
 using Mtd.Core.Repositories;
-using Mtd.Infrastructure.EFCore.Repositories;
 using System.Collections.Immutable;
 using System.Linq.Expressions;
 
-namespace Cumtd.Infrastructure.EFCore.Repositories
+namespace Mtd.Infrastructure.EFCore.Repositories
 {
 	public abstract class SynchronousEFRepository<T> : EFRepository<T>, IReadable<T, IReadOnlyCollection<T>>, IWriteable<T, IReadOnlyCollection<T>> where T : class
 	{
@@ -44,5 +44,6 @@ namespace Cumtd.Infrastructure.EFCore.Repositories
 		#endregion IWriteable
 
 		public T Attach(T entity) => _dbContext.Attach(entity).Entity;
+		public ITransaction CreateTransaction() => new EFCoreTransaction(_dbContext.Database.BeginTransaction());
 	}
 }

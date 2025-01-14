@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Mtd.Core.Entities;
 using Mtd.Core.Repositories;
 using System.Collections.Immutable;
 using System.Linq.Expressions;
@@ -88,6 +89,13 @@ namespace Mtd.Infrastructure.EFCore.Repositories
 
 		public IAsyncEnumerable<T> GetAllAsync() => Query()
 			.AsAsyncEnumerable();
-
+		public async Task<ITransaction> CreateTransactionAsync(CancellationToken cancellationToken)
+		{
+			var transaction = await _dbContext
+				.Database
+				.BeginTransactionAsync(cancellationToken)
+				.ConfigureAwait(false);
+			return new EFCoreTransaction(transaction);
+		}
 	}
 }
