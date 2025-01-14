@@ -1,17 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mtd.Core.Entities;
 using Mtd.Core.Repositories;
-using System.Security.Principal;
 
 namespace Mtd.Infrastructure.EFCore.Repositories
 {
-	public abstract class AsyncEFIdentifiableRepository<T_Identity, T_Entity> : AsyncEFRepository<T_Entity>, IAsyncIdentifiable<T_Identity, T_Entity>
+	public abstract class AsyncEFIdentifiableRepository<T_Identity, T_Entity>(DbContext context) : AsyncEFRepository<T_Entity>(context), IAsyncIdentifiable<T_Identity, T_Entity>
 		where T_Identity : notnull, IComparable<T_Identity>
 		where T_Entity : class, IIdentity<T_Identity>
 	{
-		protected AsyncEFIdentifiableRepository(DbContext context) : base(context)
-		{
-		}
 
 		#region IAsyncIdentifiable
 
