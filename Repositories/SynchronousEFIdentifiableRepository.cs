@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Mtd.Core.Entities;
 using Mtd.Core.Repositories;
 
-namespace Cumtd.Infrastructure.EFCore.Repositories
+namespace Mtd.Infrastructure.EFCore.Repositories
 {
 	public abstract class SynchronousEFIdentifiableRepository<T_Identity, T_Entity> : SynchronousEFRepository<T_Entity>, IIdentifiable<T_Identity, T_Entity>
 		where T_Identity : IComparable<T_Identity>
