@@ -6,9 +6,8 @@ using System.Linq.Expressions;
 
 namespace Mtd.Infrastructure.EFCore.Repositories
 {
-	public abstract class AsyncEFRepository<T> : EFRepository<T>, IAsyncReadable<T, IReadOnlyCollection<T>>, IAsyncWriteable<T, IReadOnlyCollection<T>> where T : class
+	public abstract class AsyncEFRepository<T>(DbContext context) : EFRepository<T>(context), IAsyncReadable<T, IReadOnlyCollection<T>>, IAsyncWriteable<T, IReadOnlyCollection<T>> where T : class
 	{
-		protected AsyncEFRepository(DbContext context) : base(context) { }
 
 		#region IAsyncReadable
 
