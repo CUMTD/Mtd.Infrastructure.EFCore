@@ -6,9 +6,8 @@ using System.Linq.Expressions;
 
 namespace Mtd.Infrastructure.EFCore.Repositories
 {
-	public abstract class SynchronousEFRepository<T> : EFRepository<T>, IReadable<T, IReadOnlyCollection<T>>, IWriteable<T, IReadOnlyCollection<T>> where T : class
+	public abstract class SynchronousEFRepository<T>(DbContext context) : EFRepository<T>(context), IReadable<T, IReadOnlyCollection<T>>, IWriteable<T, IReadOnlyCollection<T>> where T : class
 	{
-		protected SynchronousEFRepository(DbContext context) : base(context) { }
 
 		#region IReadable
 		public bool All(Expression<Func<T, bool>> predicate) => Query().All(predicate);
